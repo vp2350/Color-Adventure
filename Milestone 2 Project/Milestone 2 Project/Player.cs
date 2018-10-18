@@ -12,6 +12,40 @@ namespace Milestone_2_Project
     class Player
     {
         //this class will hold everything partaining to the player position and implimentation
+        //attributes
+        Texture2D texture2D;
+        Rectangle rectangle;
 
+        //properties
+        public Texture2D Texture2D
+        {
+            get
+            {
+                return this.texture2D;
+            }
+            set
+            {
+                this.texture2D = value;
+            }
+        }
+        public Rectangle Rectangle
+        {
+            get
+            {
+                return this.rectangle;
+            }
+            set
+            {
+                this.rectangle = value;
+            }
+        }
+
+        //constructor
+        public Player(int x, int y, int width, int height)
+        {
+            rectangle = new Rectangle(x, y, width, height);
+        }
+
+        public virtual void Draw(SpriteBatch spriteBatch) { }
     }
 }
