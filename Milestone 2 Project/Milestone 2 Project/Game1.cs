@@ -12,6 +12,7 @@ namespace Milestone_2_Project
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         KeyboardState kState;
+        SpriteFont spriteFont;
 
         
         public Game1()
