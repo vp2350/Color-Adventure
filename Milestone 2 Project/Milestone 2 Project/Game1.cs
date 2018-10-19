@@ -11,6 +11,8 @@ namespace Milestone_2_Project
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        KeyboardState kState;
+
         
         public Game1()
         {
