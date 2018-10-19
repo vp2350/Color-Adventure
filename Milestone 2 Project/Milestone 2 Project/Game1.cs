@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 
 namespace Milestone_2_Project
 {
@@ -13,8 +15,14 @@ namespace Milestone_2_Project
         SpriteBatch spriteBatch;
         KeyboardState kState;
         SpriteFont spriteFont;
+        Vector2 vector2;
+        Player player;
 
-        
+        //keyboard attributes
+        Boolean[] wasd = { false, false, false, false };
+        string[] wasdStr = { "W", "A", "S", "D" };
+
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -30,6 +38,8 @@ namespace Milestone_2_Project
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            player = new Player(0, 0, 85, 92);
+            vector2 = new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2);
 
             base.Initialize();
         }
@@ -66,6 +76,17 @@ namespace Milestone_2_Project
                 Exit();
 
             // TODO: Add your update logic here
+            kState = Keyboard.GetState();
+
+            //change position based on button press
+            if (kState.IsKeyDown(Keys.W))
+                vector2.Y -= 1;
+            if (kState.IsKeyDown(Keys.A))
+                vector2.X -= 1;
+            if (kState.IsKeyDown(Keys.S))
+                vector2.Y += 1;
+            if (kState.IsKeyDown(Keys.D))
+                vector2.X += 1;
 
             base.Update(gameTime);
         }
@@ -77,8 +98,29 @@ namespace Milestone_2_Project
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.AliceBlue);
+            spriteBatch.Begin();
 
             // TODO: Add your drawing code here
+            spriteBatch.Draw(player.Texture2D, new Rectangle((int)vector2.X, (int)vector2.Y, 70, 80), player.Rectangle, Color.White);
+
+            //check key input and move
+            if (kState.IsKeyDown(Keys.W) == true)
+            {
+                spriteBatch.Draw(player.Texture2D, new Rectangle((int)vector2.X, (int)vector2.Y, 70, 80), player.Rectangle, Color.White);
+            }
+            if (kState.IsKeyDown(Keys.A) == true)
+            {
+                spriteBatch.Draw(player.Texture2D, new Rectangle((int)vector2.X, (int)vector2.Y, 70, 80), player.Rectangle, Color.White);
+            }
+            if (kState.IsKeyDown(Keys.S) == true)
+            {
+                spriteBatch.Draw(player.Texture2D, new Rectangle((int)vector2.X, (int)vector2.Y, 70, 80), player.Rectangle, Color.White, 0,
+                    Vector2.Zero, SpriteEffects.FlipVertically, 0);
+            }
+            if (kState.IsKeyDown(Keys.D) == true)
+            {
+                spriteBatch.Draw(player.Texture2D, new Rectangle((int)vector2.X, (int)vector2.Y, 70, 80), player.Rectangle, Color.White);
+            }
 
             base.Draw(gameTime);
         }
