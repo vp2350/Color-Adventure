@@ -46,7 +46,5 @@ namespace Milestone_2_Project
         {
             rectangle = new Rectangle(x, y, width, height);
         }
-
-        public virtual void Draw(SpriteBatch spriteBatch) { }
     }
 }

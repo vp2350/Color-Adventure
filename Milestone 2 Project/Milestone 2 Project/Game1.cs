@@ -17,6 +17,7 @@ namespace Milestone_2_Project
         SpriteFont spriteFont;
         Vector2 vector2;
         Player player;
+        List<Tile> tiles;
 
         //keyboard attributes
         Boolean[] wasd = { false, false, false, false };
@@ -40,6 +41,7 @@ namespace Milestone_2_Project
             // TODO: Add your initialization logic here
             player = new Player(0, 0, 50, 50);
             vector2 = new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2);
+            tiles = new List<Tile>();
 
             base.Initialize();
         }
@@ -105,6 +107,8 @@ namespace Milestone_2_Project
             spriteBatch.Begin();
             spriteBatch.Draw(player.Sprite, player.Position, Color.White);
 
+            //draw each tile
+            //will change in later iterations
 
 
             base.Draw(gameTime);
