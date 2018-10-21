@@ -7,45 +7,43 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+// This class will hold everything pertaining to the player position and implimentation
+
 namespace Milestone_2_Project
 {
     class Player:GameObject
     {
-        //this class will hold everything partaining to the player position and implimentation
-        //attributes
-        Texture2D texture2D;
-        Rectangle rectangle;
-        public Rectangle sourceRec = new Rectangle(0, 0, 30, 30);
+        // Attributes
+        protected Rectangle sourceRec = new Rectangle(0, 0, 30, 30);
+        protected Boolean hasBuff;
 
-        //properties
-        public Texture2D Texture2D
+        // Readable
+        public Rectangle SourceRec
         {
             get
             {
-                return this.texture2D;
-            }
-            set
-            {
-                this.texture2D = value;
-            }
-        }
-        public Rectangle Rectangle
-        {
-            get
-            {
-                return this.rectangle;
-            }
-            set
-            {
-                this.rectangle = value;
+                return sourceRec;
             }
         }
 
-        //constructor
-        public Player(int x, int y, int width, int height)
-            : base(x, y, width, height)
+        // Readable/Writeable
+        public Boolean HasBuff
         {
-            rectangle = new Rectangle(x, y, width, height);
+            get
+            {
+                return hasBuff;
+            }
+            set
+            {
+                hasBuff = value;
+            }
+        }
+
+
+        // Constructor
+        public Player(Rectangle rect) : base(rect)
+        {
+            hasBuff = false;
         }
     }
 }

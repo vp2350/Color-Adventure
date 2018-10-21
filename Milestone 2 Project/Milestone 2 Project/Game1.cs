@@ -11,17 +11,20 @@ namespace Milestone_2_Project
     /// </summary>
     public class Game1 : Game
     {
+        enum PlayerState { Standing, Up, Down, Left, Right}
+        enum GameState { Menu, Instructions, Game, Gameover}
+        GameState gameState;
+        PlayerState playerState;
+
+        // Graphics
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        KeyboardState kState;
         SpriteFont spriteFont;
-        Vector2 vector2;
+        KeyboardState kState;
+
+        // GameObjects
         Player player;
         List<Tile> tiles;
-
-        //keyboard attributes
-        Boolean[] wasd = { false, false, false, false };
-        string[] wasdStr = { "W", "A", "S", "D" };
 
 
         public Game1()
@@ -38,31 +41,28 @@ namespace Milestone_2_Project
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            player = new Player(100, 100, 50, 50);
-            vector2 = new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2);
+            player = new Player(new Rectangle(100, 100, 50, 50));
             tiles = new List<Tile>();
+            gameState = GameState.Menu;
+            playerState = PlayerState.Standing;
 
             base.Initialize();
         }
 
         /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
+        /// LoadContent will be called once per game and is the place to load all of your content.
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            // TODO: use this.Content to load your game content here
             player.Sprite = Content.Load<Texture2D>("PlayerSprite");
             spriteFont = Content.Load<SpriteFont>("SpriteFont1");
 
         }
 
         /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
+        /// UnloadContent will be called once per game and is the place to unload game-specific content.
         /// </summary>
         protected override void UnloadContent()
         {
@@ -70,27 +70,38 @@ namespace Milestone_2_Project
         }
 
         /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
+        /// Allows the game to run logic such as updating the world, checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            // Esc key instantly exits game.
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-            kState = Keyboard.GetState();
 
-            //change position based on button press
+            // Moves player and updates player state.
+            kState = Keyboard.GetState();
             if (kState.IsKeyDown(Keys.W))
+            {
+                playerState = PlayerState.Up;
                 player.PositionY -= 2;
-            if (kState.IsKeyDown(Keys.A))
-                player.PositionX -= 2;
+            }
             if (kState.IsKeyDown(Keys.S))
+            {
+                playerState = PlayerState.Down;
                 player.PositionY += 2;
+            }
+            if (kState.IsKeyDown(Keys.A))
+            {
+                playerState = PlayerState.Left;
+                player.PositionX -= 2;
+            }
             if (kState.IsKeyDown(Keys.D))
+            {
+                playerState = PlayerState.Right;
                 player.PositionX += 2;
+            }
 
             base.Update(gameTime);
         }
@@ -102,17 +113,19 @@ namespace Milestone_2_Project
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.AliceBlue);
-           
-            // TODO: Add your drawing code here
             spriteBatch.Begin();
-            if (kState.IsKeyDown(Keys.A))
+
+            // Draw Player
+            if (playerState == PlayerState.Left)
             {
-                spriteBatch.Draw(player.Sprite, player.Position, player.sourceRec, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+                spriteBatch.Draw(player.Sprite, player.Position, player.SourceRec, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
             }
             else
             {
-                spriteBatch.Draw(player.Sprite, player.Position, player.sourceRec, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
+                spriteBatch.Draw(player.Sprite, player.Position, player.SourceRec, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
             }
+
+            // Draw Text
             spriteBatch.DrawString(spriteFont, "Milestone 2", new Vector2(10, 10), Color.Black);
 
             //draw each tile

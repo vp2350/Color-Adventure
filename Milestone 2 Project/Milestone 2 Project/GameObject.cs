@@ -10,42 +10,49 @@ namespace Milestone_2_Project
 {
     class GameObject
     {
-        protected Rectangle position;                           //Main rectangle for the game object
+        protected Rectangle rect;                           //Main rectangle for the game object
         protected Texture2D sprite;
 
+        // Readable/Writeable
         public Rectangle Position
         {
             get
             {
-                return position;
+                return rect;
             }
             set
             {
-                position = value;
+                rect = value;
             }
         }
+
+        // Readable/Writeable
         public int PositionX
         {
             get
             {
-                return position.X;
+                return rect.X;
             }
             set
             {
-                position.X = value;
+                rect.X = value;
             }
         }
+
+        // Readable/Writeable
         public int PositionY
         {
             get
             {
-                return position.Y;
+                return rect.Y;
             }
             set
             {
-                position.Y = value;
+                rect.Y = value;
             }
         }
+
+        // Readable/Writeable
         public Texture2D Sprite
         {
             get
@@ -58,13 +65,15 @@ namespace Milestone_2_Project
             }
         }
 
-        public GameObject(int x, int y, int width, int height)          //Main constructor for game object
+
+        public GameObject(Rectangle rect)          //Main constructor for game object
         {
-            position = new Rectangle(x, y, width, height);
+            this.rect = rect;
         }
+
         public virtual void Draw(SpriteBatch spriteBatch)               //Overridable draw method
         {
-            spriteBatch.Draw(sprite, position, Color.White);
+            spriteBatch.Draw(sprite, rect, Color.White);
         }
     }
 }
