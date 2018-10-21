@@ -86,7 +86,7 @@ namespace Milestone_2_Project
             if (kState.IsKeyDown(Keys.S))
                 player.PositionY -= 2;
             if (kState.IsKeyDown(Keys.D))
-                player.PositionY+=2;
+                player.PositionY += 2;
 
             base.Update(gameTime);
         }
@@ -98,11 +98,10 @@ namespace Milestone_2_Project
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.AliceBlue);
+           
+            // TODO: Add your drawing code here
             spriteBatch.Begin();
             spriteBatch.Draw(player.Sprite, player.Position, Color.White);
-
-            // TODO: Add your drawing code here
-            
 
             base.Draw(gameTime);
         }
