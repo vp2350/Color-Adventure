@@ -14,7 +14,7 @@ namespace Milestone_2_Project
         protected Texture2D sprite;
 
         // Readable/Writeable
-        public Rectangle Position
+        public Rectangle rectangle
         {
             get
             {

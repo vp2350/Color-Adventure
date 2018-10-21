@@ -21,30 +21,11 @@ namespace Milestone_2_Project
         // Check collision between this object and any given object
         public bool CheckCollision(GameObject objToCheck)
         {
-            if (rect.Intersects(objToCheck.Position))
+            if (rect.Intersects(objToCheck.rectangle))
             {
                 return true;
             }
 
-            return false;
-
-        }
-
-        /*
-        Normal: Safe to walk on
-        Death: You die
-        Buff: Gives you a buff
-        NeedBuff: You die unless you have the buff
-        Move: Moves you to another space
-        */
-
-        // Check for collisions
-        public bool CheckCollision(Rectangle rectangle)
-        {
-            if (rect.Intersects(rectangle))
-            {
-                return true;
-            }
             return false;
         }
     }

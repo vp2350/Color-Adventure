@@ -59,6 +59,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Tile.cs" />
+    <Compile Include="TileBuff.cs" />
+    <Compile Include="TileBuffReq.cs" />
+    <Compile Include="TileKill.cs" />
+    <Compile Include="TileMove.cs" />
+    <Compile Include="TileNormal.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
