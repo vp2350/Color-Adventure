@@ -114,8 +114,10 @@ namespace Milestone_2_Project
                 spriteBatch.Draw(player.Sprite, player.Position, player.sourceRec, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
             }
             spriteBatch.DrawString(spriteFont, "Milestone 2", new Vector2(10, 10), Color.Black);
+
             //draw each tile
             //will change in later iterations
+
 
             spriteBatch.End();
             base.Draw(gameTime);

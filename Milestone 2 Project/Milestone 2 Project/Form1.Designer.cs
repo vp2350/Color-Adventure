@@ -48,7 +48,7 @@
             // BlueRedTile
             // 
             this.BlueRedTile.AutoSize = true;
-            this.BlueRedTile.Location = new System.Drawing.Point(241, 89);
+            this.BlueRedTile.Location = new System.Drawing.Point(241, 114);
             this.BlueRedTile.Name = "BlueRedTile";
             this.BlueRedTile.Size = new System.Drawing.Size(113, 21);
             this.BlueRedTile.TabIndex = 0;
@@ -59,7 +59,7 @@
             // GreenTile
             // 
             this.GreenTile.AutoSize = true;
-            this.GreenTile.Location = new System.Drawing.Point(241, 157);
+            this.GreenTile.Location = new System.Drawing.Point(241, 170);
             this.GreenTile.Name = "GreenTile";
             this.GreenTile.Size = new System.Drawing.Size(102, 21);
             this.GreenTile.TabIndex = 1;
@@ -81,7 +81,7 @@
             // YellowTile
             // 
             this.YellowTile.AutoSize = true;
-            this.YellowTile.Location = new System.Drawing.Point(241, 298);
+            this.YellowTile.Location = new System.Drawing.Point(241, 282);
             this.YellowTile.Name = "YellowTile";
             this.YellowTile.Size = new System.Drawing.Size(91, 21);
             this.YellowTile.TabIndex = 3;
@@ -92,7 +92,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Milestone_2_Project.Properties.Resources.BlueTile;
-            this.pictureBox1.Location = new System.Drawing.Point(159, 60);
+            this.pictureBox1.Location = new System.Drawing.Point(159, 85);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(50, 50);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -102,7 +102,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Milestone_2_Project.Properties.Resources.GreenTile;
-            this.pictureBox2.Location = new System.Drawing.Point(159, 128);
+            this.pictureBox2.Location = new System.Drawing.Point(159, 141);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(50, 50);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -112,7 +112,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::Milestone_2_Project.Properties.Resources.RedTile;
-            this.pictureBox3.Location = new System.Drawing.Point(103, 60);
+            this.pictureBox3.Location = new System.Drawing.Point(103, 85);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(50, 50);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -122,7 +122,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = global::Milestone_2_Project.Properties.Resources.YellowTile;
-            this.pictureBox4.Location = new System.Drawing.Point(159, 269);
+            this.pictureBox4.Location = new System.Drawing.Point(159, 253);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(50, 50);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
