@@ -39,7 +39,7 @@ namespace Milestone_2_Project
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            player = new Player(0, 0, 50, 50);
+            player = new Player(100, 100, 50, 50);
             vector2 = new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2);
             tiles = new List<Tile>();
 
@@ -55,7 +55,7 @@ namespace Milestone_2_Project
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
-            player.Texture2D = Content.Load<Texture2D>("PlayerSprite");
+            player.Sprite = Content.Load<Texture2D>("PlayerSprite");
             spriteFont = Content.Load<SpriteFont>("SpriteFont1");
 
         }
@@ -84,13 +84,13 @@ namespace Milestone_2_Project
 
             //change position based on button press
             if (kState.IsKeyDown(Keys.W))
-                player.PositionY += 2;
+                player.PositionY -= 2;
             if (kState.IsKeyDown(Keys.A))
                 player.PositionX -= 2;
             if (kState.IsKeyDown(Keys.S))
-                player.PositionY -= 2;
-            if (kState.IsKeyDown(Keys.D))
                 player.PositionY += 2;
+            if (kState.IsKeyDown(Keys.D))
+                player.PositionX += 2;
 
             base.Update(gameTime);
         }
@@ -105,12 +105,19 @@ namespace Milestone_2_Project
            
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            spriteBatch.Draw(player.Sprite, player.Position, Color.White);
-
+            if (kState.IsKeyDown(Keys.A))
+            {
+                spriteBatch.Draw(player.Sprite, player.Position, player.sourceRec, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+            }
+            else
+            {
+                spriteBatch.Draw(player.Sprite, player.Position, player.sourceRec, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
+            }
+            spriteBatch.DrawString(spriteFont, "Milestone 2", new Vector2(10, 10), Color.Black);
             //draw each tile
             //will change in later iterations
 
-
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }

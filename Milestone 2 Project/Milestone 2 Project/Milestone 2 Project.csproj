@@ -128,15 +128,27 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.manifest" />
-    <None Include="Content\SpriteFont1.xnb" />
+    <Content Include="Content\SpriteFont1.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\BlueTile.png" />
-    <Content Include="Content\GreenTile.png" />
+    <Content Include="Content\BlueTile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\GreenTile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\PlayerSprite.png" />
-    <Content Include="Content\PurpleTile.png" />
-    <Content Include="Content\RedTile.png" />
-    <Content Include="Content\YellowTile.png" />
+    <Content Include="Content\PurpleTile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\RedTile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\YellowTile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\YellowTile.png" />
     <None Include="Resources\RedTile.png" />
     <None Include="Resources\PurpleTile.png" />

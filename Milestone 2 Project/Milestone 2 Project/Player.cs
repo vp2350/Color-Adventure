@@ -15,6 +15,7 @@ namespace Milestone_2_Project
         //attributes
         Texture2D texture2D;
         Rectangle rectangle;
+        public Rectangle sourceRec = new Rectangle(0, 0, 30, 30);
 
         //properties
         public Texture2D Texture2D
