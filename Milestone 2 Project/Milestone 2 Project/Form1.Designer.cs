@@ -54,6 +54,7 @@
             this.BlueRedTile.TabIndex = 0;
             this.BlueRedTile.Text = "Change Tiles";
             this.BlueRedTile.UseVisualStyleBackColor = true;
+            this.BlueRedTile.CheckedChanged += new System.EventHandler(this.BlueRedTile_CheckedChanged);
             // 
             // GreenTile
             // 
@@ -64,6 +65,7 @@
             this.GreenTile.TabIndex = 1;
             this.GreenTile.Text = "Normal Tile";
             this.GreenTile.UseVisualStyleBackColor = true;
+            this.GreenTile.CheckedChanged += new System.EventHandler(this.GreenTile_CheckedChanged);
             // 
             // PurpleTile
             // 
@@ -74,6 +76,7 @@
             this.PurpleTile.TabIndex = 2;
             this.PurpleTile.Text = "Death Tile";
             this.PurpleTile.UseVisualStyleBackColor = true;
+            this.PurpleTile.CheckedChanged += new System.EventHandler(this.PurpleTile_CheckedChanged);
             // 
             // YellowTile
             // 
@@ -84,6 +87,7 @@
             this.YellowTile.TabIndex = 3;
             this.YellowTile.Text = "Move Tile";
             this.YellowTile.UseVisualStyleBackColor = true;
+            this.YellowTile.CheckedChanged += new System.EventHandler(this.YellowTile_CheckedChanged);
             // 
             // pictureBox1
             // 
