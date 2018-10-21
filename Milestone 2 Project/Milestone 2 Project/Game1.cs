@@ -80,13 +80,13 @@ namespace Milestone_2_Project
 
             //change position based on button press
             if (kState.IsKeyDown(Keys.W))
-                vector2.Y -= 1;
+                player.PositionY += 2;
             if (kState.IsKeyDown(Keys.A))
-                vector2.X -= 1;
+                player.PositionX -= 2;
             if (kState.IsKeyDown(Keys.S))
-                vector2.Y += 1;
+                player.PositionY -= 2;
             if (kState.IsKeyDown(Keys.D))
-                vector2.X += 1;
+                player.PositionY+=2;
 
             base.Update(gameTime);
         }
@@ -101,26 +101,7 @@ namespace Milestone_2_Project
             spriteBatch.Begin();
 
             // TODO: Add your drawing code here
-            spriteBatch.Draw(player.Texture2D, new Rectangle((int)vector2.X, (int)vector2.Y, 70, 80), player.Rectangle, Color.White);
-
-            //check key input and move
-            if (kState.IsKeyDown(Keys.W) == true)
-            {
-                spriteBatch.Draw(player.Texture2D, new Rectangle((int)vector2.X, (int)vector2.Y, 70, 80), player.Rectangle, Color.White);
-            }
-            if (kState.IsKeyDown(Keys.A) == true)
-            {
-                spriteBatch.Draw(player.Texture2D, new Rectangle((int)vector2.X, (int)vector2.Y, 70, 80), player.Rectangle, Color.White);
-            }
-            if (kState.IsKeyDown(Keys.S) == true)
-            {
-                spriteBatch.Draw(player.Texture2D, new Rectangle((int)vector2.X, (int)vector2.Y, 70, 80), player.Rectangle, Color.White, 0,
-                    Vector2.Zero, SpriteEffects.FlipVertically, 0);
-            }
-            if (kState.IsKeyDown(Keys.D) == true)
-            {
-                spriteBatch.Draw(player.Texture2D, new Rectangle((int)vector2.X, (int)vector2.Y, 70, 80), player.Rectangle, Color.White);
-            }
+            
 
             base.Draw(gameTime);
         }

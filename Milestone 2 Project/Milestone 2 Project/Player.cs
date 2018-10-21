@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Milestone_2_Project
 {
-    class Player
+    class Player:GameObject
     {
         //this class will hold everything partaining to the player position and implimentation
         //attributes
@@ -42,6 +42,7 @@ namespace Milestone_2_Project
 
         //constructor
         public Player(int x, int y, int width, int height)
+            : base(x, y, width, height)
         {
             rectangle = new Rectangle(x, y, width, height);
         }
