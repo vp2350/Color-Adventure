@@ -99,6 +99,7 @@ namespace Milestone_2_Project
         {
             GraphicsDevice.Clear(Color.AliceBlue);
             spriteBatch.Begin();
+            spriteBatch.Draw(player.Sprite, player.Position, Color.White);
 
             // TODO: Add your drawing code here
             
