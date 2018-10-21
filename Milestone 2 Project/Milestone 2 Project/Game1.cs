@@ -38,7 +38,7 @@ namespace Milestone_2_Project
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            player = new Player(0, 0, 85, 92);
+            player = new Player(0, 0, 50, 50);
             vector2 = new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2);
 
             base.Initialize();
@@ -52,8 +52,10 @@ namespace Milestone_2_Project
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
             // TODO: use this.Content to load your game content here
+            player.Texture2D = Content.Load<Texture2D>("PlayerSprite");
+            spriteFont = Content.Load<SpriteFont>("SpriteFont1");
+
         }
 
         /// <summary>
@@ -102,6 +104,8 @@ namespace Milestone_2_Project
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             spriteBatch.Draw(player.Sprite, player.Position, Color.White);
+
+
 
             base.Draw(gameTime);
         }

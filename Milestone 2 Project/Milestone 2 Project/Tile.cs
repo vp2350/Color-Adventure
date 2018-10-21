@@ -83,5 +83,18 @@ namespace Milestone_2_Project
                     break;
             }
         }
+
+        //check for collision
+        public bool CheckCollision(Rectangle rectangle)
+        {
+            if (pos.Intersects(rectangle))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
