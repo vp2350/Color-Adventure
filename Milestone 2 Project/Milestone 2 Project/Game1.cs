@@ -131,28 +131,8 @@ namespace Milestone_2_Project
                 case GameState.Game:
                     // checks for collisions
                     UpdateCollisions();
-
-                    // Moves player
-                    if (kbState.IsKeyDown(Keys.W))
-                    {
-                        playerState = PlayerState.Up;
-                        player.PositionY -= 2;
-                    }
-                    if (kbState.IsKeyDown(Keys.S))
-                    {
-                        playerState = PlayerState.Down;
-                        player.PositionY += 2;
-                    }
-                    if (kbState.IsKeyDown(Keys.A))
-                    {
-                        playerState = PlayerState.Left;
-                        player.PositionX -= 2;
-                    }
-                    if (kbState.IsKeyDown(Keys.D))
-                    {
-                        playerState = PlayerState.Right;
-                        player.PositionX += 2;
-                    }
+                    playerMovements();
+                    
                     break;
 
                 case GameState.Gameover:
@@ -274,5 +254,33 @@ namespace Milestone_2_Project
             }
             return false;
         }
+
+        /// <summary>
+        /// method for player's move
+        /// </summary>
+        public void playerMovements()
+        {
+            if (kbState.IsKeyDown(Keys.W))
+            {
+                playerState = PlayerState.Up;
+                player.PositionY -= 2;
+            }
+            if (kbState.IsKeyDown(Keys.S))
+            {
+                playerState = PlayerState.Down;
+                player.PositionY += 2;
+            }
+            if (kbState.IsKeyDown(Keys.A))
+            {
+                playerState = PlayerState.Left;
+                player.PositionX -= 2;
+            }
+            if (kbState.IsKeyDown(Keys.D))
+            {
+                playerState = PlayerState.Right;
+                player.PositionX += 2;
+            }
+        }
+        
     }
 }
