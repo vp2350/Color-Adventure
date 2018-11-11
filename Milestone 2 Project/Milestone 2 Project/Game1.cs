@@ -34,6 +34,9 @@ namespace Milestone_2_Project
         Tile tileBuffReq;
         Tile tileMove;
 
+        //Timer
+        float Timer = 0;
+
 
         public Game1()
         {
@@ -132,7 +135,8 @@ namespace Milestone_2_Project
                     // checks for collisions
                     UpdateCollisions();
                     playerMovements();
-                    
+                    //timer
+                    Timer += gameTime.TotalGameTime.Seconds;
                     break;
 
                 case GameState.Gameover:
@@ -189,6 +193,7 @@ namespace Milestone_2_Project
                     spriteBatch.Draw(tileBuff.Sprite, tileBuff.rectangle, Color.White);
                     spriteBatch.Draw(tileBuffReq.Sprite, tileBuffReq.rectangle, Color.White);
                     spriteBatch.Draw(tileMove.Sprite, tileMove.rectangle, Color.White);
+                    spriteBatch.DrawString(spriteFont, Timer.ToString(), new Vector2(50,50), Color.Blue);
 
                     // Draw Player (basic)
                     if (playerState == PlayerState.Left)
