@@ -1,6 +1,6 @@
 ﻿namespace Milestone_2_Project
 {
-    partial class Form1
+    partial class Editor
     {
         /// <summary>
         /// Required designer variable.
@@ -149,7 +149,7 @@
             this.Label.TabIndex = 9;
             this.Label.Text = "Select Tiles to NOT show:";
             // 
-            // Form1
+            // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -164,8 +164,8 @@
             this.Controls.Add(this.PurpleTile);
             this.Controls.Add(this.GreenTile);
             this.Controls.Add(this.BlueRedTile);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Editor";
+            this.Text = "Editor";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
