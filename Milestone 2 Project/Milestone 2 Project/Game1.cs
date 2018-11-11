@@ -112,7 +112,10 @@ namespace Milestone_2_Project
                     {
                         gameState = GameState.Game;
                     }
-
+                    if (SingleKeyPress(Keys.Escape))
+                    {
+                        this.Exit();
+                    }
                     // Pressing i enters the instructions menu
                     if (SingleKeyPress(Keys.I))
                     {
@@ -140,6 +143,10 @@ namespace Milestone_2_Project
                     {
                         player.HasBuff = false;
                         gameState = GameState.Menu;
+                    }
+                    if (SingleKeyPress(Keys.Escape))
+                    {
+                        this.Exit();
                     }
 
                     // Reset player
@@ -170,6 +177,7 @@ namespace Milestone_2_Project
                     spriteBatch.DrawString(spriteFont, "Ultimate Tile Challenge!", new Vector2(305, 200), Color.Black);
                     spriteBatch.DrawString(spriteFont, "(Press 'Enter' To Play)", new Vector2(308, 220), Color.Black);
                     spriteBatch.DrawString(spriteFont, "(Press 'i' To view instructions)", new Vector2(282, 240), Color.Black);
+                    spriteBatch.DrawString(spriteFont, "(Press 'Esc' To Exit the game",new Vector2(290,260),Color.Black);
                     break;
 
                 case GameState.Instructions:
@@ -209,6 +217,7 @@ namespace Milestone_2_Project
                     // These will be replaced by an image later on
                     spriteBatch.DrawString(spriteFont, "You Died!", new Vector2(350, 100), Color.Black);
                     spriteBatch.DrawString(spriteFont, "(Press 'Enter' To return to the menu)", new Vector2(250, 120), Color.Black);
+                    spriteBatch.DrawString(spriteFont, "(Press 'Esc' To Exit the game", new Vector2(290, 260), Color.Black);
                     break;
             }
 
