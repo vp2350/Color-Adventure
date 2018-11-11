@@ -34,6 +34,9 @@ namespace Milestone_2_Project
         Tile tileBuffReq;
         Tile tileMove;
 
+        //background
+        Texture2D background;
+
         //Timer
         float Timer = 0;
 
@@ -76,6 +79,7 @@ namespace Milestone_2_Project
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player.Sprite = Content.Load<Texture2D>("PlayerSprite");
             spriteFont = Content.Load<SpriteFont>("SpriteFont1");
+            background = Content.Load<Texture2D>("933");
 
             // Testing Tiles
             tileNormal.Sprite = Content.Load<Texture2D>("GreenTile");
@@ -178,10 +182,11 @@ namespace Milestone_2_Project
             {
                 case GameState.Menu:
                     // These will be replaced by an image later on
-                    spriteBatch.DrawString(spriteFont, "Ultimate Tile Challenge!", new Vector2(305, 200), Color.Black);
-                    spriteBatch.DrawString(spriteFont, "(Press 'Enter' To Play)", new Vector2(308, 220), Color.Black);
-                    spriteBatch.DrawString(spriteFont, "(Press 'i' To view instructions)", new Vector2(282, 240), Color.Black);
-                    spriteBatch.DrawString(spriteFont, "(Press 'Esc' To Exit the game",new Vector2(290,260),Color.Black);
+                    spriteBatch.Draw(background, new Rectangle(0, 0, GraphicsDevice.Viewport.Width , GraphicsDevice.Viewport.Height), Color.White);
+                    spriteBatch.DrawString(spriteFont, "Ultimate Tile Challenge!", new Vector2(305, 200), Color.Red);
+                    spriteBatch.DrawString(spriteFont, "(Press 'Enter' To Play)", new Vector2(308, 220), Color.Red);
+                    spriteBatch.DrawString(spriteFont, "(Press 'i' To view instructions)", new Vector2(282, 240), Color.Red);
+                    spriteBatch.DrawString(spriteFont, "(Press 'Esc' To Exit the game)",new Vector2(290,260),Color.Red);
                     break;
 
                 case GameState.Instructions:
