@@ -14,7 +14,7 @@ namespace Milestone_2_Project
     class Player:GameObject
     {
         // Attributes
-        protected Rectangle sourceRec = new Rectangle(0, 0, 10, 16);
+        protected Rectangle sourceRec = new Rectangle(0, 0, 10, 10);
         protected Boolean hasBuff;
 
         // Readable

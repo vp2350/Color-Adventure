@@ -26,6 +26,14 @@ namespace Milestone_2_Project
         // GameObjects
         Player player;
         List<Tile> tiles;
+        int frame;
+        double timePerFrame = 100;
+        int numFrames = 3;
+        int framesElapsed;
+        const int PLAYER_Y = 30;
+        const int PLAYER_HEIGHT = 20;
+        const int PLAYER_WIDTH = 15;
+        const int PLAYER_X_OFFSET = 6;
 
         // Testing Tiles
         Tile tileNormal;
@@ -77,7 +85,7 @@ namespace Milestone_2_Project
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            player.Sprite = Content.Load<Texture2D>("PlayerSprite");
+            player.Sprite = Content.Load<Texture2D>("Player_SpriteSheet");
             spriteFont = Content.Load<SpriteFont>("SpriteFont1");
             background = Content.Load<Texture2D>("933");
 
@@ -106,6 +114,8 @@ namespace Milestone_2_Project
             // Esc key instantly exits game.
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            framesElapsed = (int)(gameTime.TotalGameTime.TotalMilliseconds / timePerFrame);
+            frame = framesElapsed % numFrames + 1;
 
             // Updates keyboard state
             previousKbState = kbState;
@@ -211,11 +221,13 @@ namespace Milestone_2_Project
                     // Draw Player (basic)
                     if (playerState == PlayerState.Left)
                     {
-                        spriteBatch.Draw(player.Sprite, player.rectangle, player.SourceRec, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+                        spriteBatch.Draw(player.Sprite, player.rectangle, new Rectangle(PLAYER_X_OFFSET + frame * PLAYER_WIDTH, PLAYER_Y, PLAYER_WIDTH,PLAYER_HEIGHT), 
+                            Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
                     }
                     else
                     {
-                        spriteBatch.Draw(player.Sprite, player.rectangle, Color.White);
+                        spriteBatch.Draw(player.Sprite, player.rectangle, new Rectangle(PLAYER_X_OFFSET + frame * PLAYER_WIDTH, PLAYER_Y, PLAYER_WIDTH,PLAYER_HEIGHT), 
+                            Color.White);
                     }
 
                     // Draw Text
