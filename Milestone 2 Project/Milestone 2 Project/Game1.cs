@@ -34,6 +34,12 @@ namespace Milestone_2_Project
         Tile tileBuffReq;
         Tile tileMove;
 
+        //background
+        Texture2D background;
+
+        //Timer
+        float Timer = 0;
+
 
         public Game1()
         {
@@ -73,6 +79,7 @@ namespace Milestone_2_Project
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player.Sprite = Content.Load<Texture2D>("PlayerSprite");
             spriteFont = Content.Load<SpriteFont>("SpriteFont1");
+            background = Content.Load<Texture2D>("933");
 
             // Testing Tiles
             tileNormal.Sprite = Content.Load<Texture2D>("GreenTile");
@@ -112,7 +119,10 @@ namespace Milestone_2_Project
                     {
                         gameState = GameState.Game;
                     }
-
+                    if (SingleKeyPress(Keys.Escape))
+                    {
+                        this.Exit();
+                    }
                     // Pressing i enters the instructions menu
                     if (SingleKeyPress(Keys.I))
                     {
@@ -132,7 +142,8 @@ namespace Milestone_2_Project
                     // checks for collisions
                     UpdateCollisions();
                     playerMovements();
-                    
+                    //timer
+                    Timer += gameTime.TotalGameTime.Seconds;
                     break;
 
                 case GameState.Gameover:
@@ -140,6 +151,10 @@ namespace Milestone_2_Project
                     {
                         player.HasBuff = false;
                         gameState = GameState.Menu;
+                    }
+                    if (SingleKeyPress(Keys.Escape))
+                    {
+                        this.Exit();
                     }
 
                     // Reset player
@@ -167,9 +182,11 @@ namespace Milestone_2_Project
             {
                 case GameState.Menu:
                     // These will be replaced by an image later on
-                    spriteBatch.DrawString(spriteFont, "Ultimate Tile Challenge!", new Vector2(305, 200), Color.Black);
-                    spriteBatch.DrawString(spriteFont, "(Press 'Enter' To Play)", new Vector2(308, 220), Color.Black);
-                    spriteBatch.DrawString(spriteFont, "(Press 'i' To view instructions)", new Vector2(282, 240), Color.Black);
+                    spriteBatch.Draw(background, new Rectangle(0, 0, GraphicsDevice.Viewport.Width , GraphicsDevice.Viewport.Height), Color.White);
+                    spriteBatch.DrawString(spriteFont, "Ultimate Tile Challenge!", new Vector2(305, 200), Color.Red);
+                    spriteBatch.DrawString(spriteFont, "(Press 'Enter' To Play)", new Vector2(308, 220), Color.Red);
+                    spriteBatch.DrawString(spriteFont, "(Press 'i' To view instructions)", new Vector2(282, 240), Color.Red);
+                    spriteBatch.DrawString(spriteFont, "(Press 'Esc' To Exit the game)",new Vector2(290,260),Color.Red);
                     break;
 
                 case GameState.Instructions:
@@ -189,6 +206,7 @@ namespace Milestone_2_Project
                     spriteBatch.Draw(tileBuff.Sprite, tileBuff.rectangle, Color.White);
                     spriteBatch.Draw(tileBuffReq.Sprite, tileBuffReq.rectangle, Color.White);
                     spriteBatch.Draw(tileMove.Sprite, tileMove.rectangle, Color.White);
+                    spriteBatch.DrawString(spriteFont, Timer.ToString(), new Vector2(50,50), Color.Blue);
 
                     // Draw Player (basic)
                     if (playerState == PlayerState.Left)
@@ -209,6 +227,7 @@ namespace Milestone_2_Project
                     // These will be replaced by an image later on
                     spriteBatch.DrawString(spriteFont, "You Died!", new Vector2(350, 100), Color.Black);
                     spriteBatch.DrawString(spriteFont, "(Press 'Enter' To return to the menu)", new Vector2(250, 120), Color.Black);
+                    spriteBatch.DrawString(spriteFont, "(Press 'Esc' To Exit the game", new Vector2(290, 260), Color.Black);
                     break;
             }
 
