@@ -28,7 +28,7 @@ namespace Milestone_2_Project
         List<Tile> tiles;
         int frame;
         double timePerFrame = 100;
-        int numFrames = 3;
+        int numFrames = 2;
         int framesElapsed;
         const int PLAYER_Y = 30;
         const int PLAYER_HEIGHT = 20;
@@ -63,7 +63,7 @@ namespace Milestone_2_Project
         /// </summary>
         protected override void Initialize()
         {
-            player = new Player(new Rectangle(100, 100, 10, 16));
+            player = new Player(new Rectangle(100, 100, 25, 30));
             tiles = new List<Tile>();
 
             // Testing Tiles
@@ -168,7 +168,7 @@ namespace Milestone_2_Project
                     }
 
                     // Reset player
-                    player.rectangle = new Rectangle(100, 100, 10, 16);
+                    player.rectangle = new Rectangle(100, 100, 25, 30);
                     break;
             }
 
