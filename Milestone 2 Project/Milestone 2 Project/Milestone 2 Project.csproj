@@ -133,6 +133,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.manifest" />
+    <Content Include="Content\Player_SpriteSheet.png" />
     <Content Include="Content\SpriteFont1.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
