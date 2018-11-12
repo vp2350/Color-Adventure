@@ -12,7 +12,7 @@ namespace Milestone_2_Project
     public class Game1 : Game
     {
         enum PlayerState { Standing, Up, Down, Left, Right}
-        enum GameState { Menu, Instructions, Game, Gameover}
+        enum GameState { Menu, Instructions, Game, Gameover, Win}
         GameState gameState;
         PlayerState playerState;
 
@@ -37,10 +37,24 @@ namespace Milestone_2_Project
 
         // Testing Tiles
         Tile tileNormal;
+
         Tile tileKill;
+        Tile tileKill2;
+
         Tile tileBuff;
+        Tile tileBuff2;
+
         Tile tileBuffReq;
+        Tile tileBuffReq2;
+        Tile tileBuffReq3;
+
         Tile tileMove;
+        Tile tileMove2;
+        Tile tileMove3;
+        Tile tileMove4;
+
+
+        Tile tileWin;
 
         //background
         Texture2D background;
@@ -68,10 +82,23 @@ namespace Milestone_2_Project
 
             // Testing Tiles
             tileNormal = new TileNormal(new Rectangle(200, 50, 50, 50));
-            tileKill = new TileKill(new Rectangle(200, 100, 50, 50));
-            tileBuff = new TileBuff(new Rectangle(200, 150, 50, 50));
-            tileBuffReq = new TileBuffReq(new Rectangle(200, 200, 50, 50));
-            tileMove = new TileMove(new Rectangle(200, 250, 50, 50));
+
+            tileKill = new TileKill(new Rectangle(200, 50, 50, 50));
+            tileKill2 = new TileKill(new Rectangle(300, 50, 50, 50));
+
+            tileBuff = new TileBuff(new Rectangle(250, 200, 50, 50));
+            tileBuff2 = new TileBuff(new Rectangle(300, 100, 50, 50));
+
+            tileBuffReq = new TileBuffReq(new Rectangle(200, 100, 50, 50));
+            tileBuffReq2 = new TileBuffReq(new Rectangle(350, 100, 50, 50));
+            tileBuffReq3 = new TileBuffReq(new Rectangle(300, 200, 50, 50));
+            
+            tileMove = new TileMove(new Rectangle(250, 150, 50, 50));
+            tileMove2 = new TileMove(new Rectangle(350, 50, 50, 50));
+            tileMove3 = new TileMove(new Rectangle(350, 200, 50, 50));
+            tileMove4 = new TileMove(new Rectangle(350, 150, 50, 50));
+
+            tileWin = new TileWin(new Rectangle(300, 150, 50, 50));
 
             gameState = GameState.Menu;
             playerState = PlayerState.Standing;
@@ -95,6 +122,7 @@ namespace Milestone_2_Project
             tileBuff.Sprite = Content.Load<Texture2D>("BlueTile");
             tileBuffReq.Sprite = Content.Load<Texture2D>("PurpleTile");
             tileMove.Sprite = Content.Load<Texture2D>("YellowTile");
+            tileWin.Sprite = Content.Load<Texture2D>("WinTile");
         }
 
         /// <summary>
@@ -211,12 +239,30 @@ namespace Milestone_2_Project
 
                 case GameState.Game:
                     // Draw Test Tiles
-                    spriteBatch.Draw(tileNormal.Sprite, tileNormal.rectangle, Color.White);
+                    
                     spriteBatch.Draw(tileKill.Sprite, tileKill.rectangle, Color.White);
+                    spriteBatch.Draw(tileKill.Sprite, tileKill2.rectangle, Color.White);
+
+                    spriteBatch.Draw(tileNormal.Sprite, new Rectangle(250, 50, 50, 50), Color.White);
+                    spriteBatch.Draw(tileNormal.Sprite, new Rectangle(250, 100, 50, 50), Color.White);
+                    spriteBatch.Draw(tileNormal.Sprite, new Rectangle(200, 150, 50, 50), Color.White);
+                    spriteBatch.Draw(tileNormal.Sprite, new Rectangle(200, 200, 50, 50), Color.White);
+                    
                     spriteBatch.Draw(tileBuff.Sprite, tileBuff.rectangle, Color.White);
-                    spriteBatch.Draw(tileBuffReq.Sprite, tileBuffReq.rectangle, Color.White);
+                    spriteBatch.Draw(tileBuff.Sprite, tileBuff2.rectangle, Color.White);
+                    
+                    spriteBatch.Draw(tileBuffReq.Sprite, tileBuffReq.rectangle , Color.White);
+                    spriteBatch.Draw(tileBuffReq.Sprite, tileBuffReq2.rectangle, Color.White);
+                    spriteBatch.Draw(tileBuffReq.Sprite, tileBuffReq3.rectangle, Color.White);
+
                     spriteBatch.Draw(tileMove.Sprite, tileMove.rectangle, Color.White);
+                    spriteBatch.Draw(tileMove.Sprite, tileMove2.rectangle, Color.White);
+                    spriteBatch.Draw(tileMove.Sprite, tileMove3.rectangle, Color.White);
+                    spriteBatch.Draw(tileMove.Sprite, tileMove4.rectangle, Color.White);
+
+                    spriteBatch.Draw(tileWin.Sprite, tileWin.rectangle, Color.White);
                     spriteBatch.DrawString(spriteFont, Timer.ToString(), new Vector2(50,50), Color.Blue);
+
 
                     // Draw Player (basic)
                     if (playerState == PlayerState.Left)
@@ -241,6 +287,9 @@ namespace Milestone_2_Project
                     spriteBatch.DrawString(spriteFont, "(Press 'Enter' To return to the menu)", new Vector2(250, 120), Color.Black);
                     spriteBatch.DrawString(spriteFont, "(Press 'Esc' To Exit the game", new Vector2(290, 260), Color.Black);
                     break;
+                case GameState.Win:
+                    spriteBatch.DrawString(spriteFont, "You win", new Vector2(100, 100), Color.Black);
+                    break;
             }
 
 
@@ -252,17 +301,17 @@ namespace Milestone_2_Project
         // Processes collisions
         public void UpdateCollisions()
         {
-            if (tileKill.CheckCollision(player))
+            if (tileKill.CheckCollision(player) || tileKill2.CheckCollision(player))
             {
                 gameState = GameState.Gameover;
             }
-
-            if (tileBuff.CheckCollision(player))
+            
+            if (tileBuff.CheckCollision(player)|| tileBuff2.CheckCollision(player))
             {
                 player.HasBuff = true;
             }
 
-            if (tileBuffReq.CheckCollision(player))
+            if (tileBuffReq.CheckCollision(player)|| tileBuffReq2.CheckCollision(player)|| tileBuffReq3.CheckCollision(player))
             {
                 if (!player.HasBuff)
                 {
@@ -270,9 +319,13 @@ namespace Milestone_2_Project
                 }
             }
 
-            if (tileMove.CheckCollision(player))
+            if (tileMove.CheckCollision(player)|| tileMove2.CheckCollision(player)|| tileMove3.CheckCollision(player)|| tileMove4.CheckCollision(player))
             {
                 player.PositionX -= 50;
+            }
+            if(tileWin.CheckCollision(player))
+            {
+                gameState = GameState.Win;
             }
         }
 

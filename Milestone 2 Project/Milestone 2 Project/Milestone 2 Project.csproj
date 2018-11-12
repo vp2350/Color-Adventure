@@ -64,6 +64,7 @@
     <Compile Include="TileKill.cs" />
     <Compile Include="TileMove.cs" />
     <Compile Include="TileNormal.cs" />
+    <Compile Include="TileWin.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
