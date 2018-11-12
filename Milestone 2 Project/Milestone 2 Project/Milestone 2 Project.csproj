@@ -151,6 +151,7 @@
     <Content Include="Content\RedTile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\WinTile.png" />
     <Content Include="Content\YellowTile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
