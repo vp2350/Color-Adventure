@@ -35,26 +35,8 @@ namespace Milestone_2_Project
         const int PLAYER_WIDTH = 15;
         const int PLAYER_X_OFFSET = 6;
 
-        // Testing Tiles
-        Tile tileNormal;
-
-        Tile tileKill;
-        Tile tileKill2;
-
-        Tile tileBuff;
-        Tile tileBuff2;
-
-        Tile tileBuffReq;
-        Tile tileBuffReq2;
-        Tile tileBuffReq3;
-
-        Tile tileMove;
-        Tile tileMove2;
-        Tile tileMove3;
-        Tile tileMove4;
-
-
-        Tile tileWin;
+        // Map
+        Map level1;
 
         //background
         Texture2D background;
@@ -80,28 +62,11 @@ namespace Milestone_2_Project
             player = new Player(new Rectangle(100, 100, 25, 30));
             tiles = new List<Tile>();
 
-            // Testing Tiles
-            tileNormal = new TileNormal(new Rectangle(200, 50, 50, 50));
-
-            tileKill = new TileKill(new Rectangle(200, 50, 50, 50));
-            tileKill2 = new TileKill(new Rectangle(300, 50, 50, 50));
-
-            tileBuff = new TileBuff(new Rectangle(250, 200, 50, 50));
-            tileBuff2 = new TileBuff(new Rectangle(300, 100, 50, 50));
-
-            tileBuffReq = new TileBuffReq(new Rectangle(200, 100, 50, 50));
-            tileBuffReq2 = new TileBuffReq(new Rectangle(350, 100, 50, 50));
-            tileBuffReq3 = new TileBuffReq(new Rectangle(300, 200, 50, 50));
-            
-            tileMove = new TileMove(new Rectangle(250, 150, 50, 50));
-            tileMove2 = new TileMove(new Rectangle(350, 50, 50, 50));
-            tileMove3 = new TileMove(new Rectangle(350, 200, 50, 50));
-            tileMove4 = new TileMove(new Rectangle(350, 150, 50, 50));
-
-            tileWin = new TileWin(new Rectangle(300, 150, 50, 50));
-
             gameState = GameState.Menu;
             playerState = PlayerState.Standing;
+
+            // Create new map, at location 300, 100 with tile size 50, 50
+            level1 = new Map(new Vector2(300, 100), 50, 50);
 
             base.Initialize();
         }
@@ -116,13 +81,14 @@ namespace Milestone_2_Project
             spriteFont = Content.Load<SpriteFont>("SpriteFont1");
             background = Content.Load<Texture2D>("933");
 
-            // Testing Tiles
-            tileNormal.Sprite = Content.Load<Texture2D>("GreenTile");
-            tileKill.Sprite = Content.Load<Texture2D>("RedTile");
-            tileBuff.Sprite = Content.Load<Texture2D>("BlueTile");
-            tileBuffReq.Sprite = Content.Load<Texture2D>("PurpleTile");
-            tileMove.Sprite = Content.Load<Texture2D>("YellowTile");
-            tileWin.Sprite = Content.Load<Texture2D>("WinTile");
+            // Load map and populate it
+            level1.ReadMap("test.data");
+            level1.PopulateGameMap(Content.Load<Texture2D>("GreenTile"),
+                                   Content.Load<Texture2D>("RedTile"),
+                                   Content.Load<Texture2D>("BlueTile"),
+                                   Content.Load<Texture2D>("PurpleTile"),
+                                   Content.Load<Texture2D>("YellowTile"),
+                                   Content.Load<Texture2D>("WinTile"));
         }
 
         /// <summary>
@@ -178,7 +144,7 @@ namespace Milestone_2_Project
 
                 case GameState.Game:
                     // checks for collisions
-                    UpdateCollisions();
+                    // UpdateCollisions();
                     playerMovements();
                     //timer
                     Timer += gameTime.TotalGameTime.Seconds;
@@ -238,31 +204,9 @@ namespace Milestone_2_Project
                     break;
 
                 case GameState.Game:
-                    // Draw Test Tiles
-                    
-                    spriteBatch.Draw(tileKill.Sprite, tileKill.rectangle, Color.White);
-                    spriteBatch.Draw(tileKill.Sprite, tileKill2.rectangle, Color.White);
 
-                    spriteBatch.Draw(tileNormal.Sprite, new Rectangle(250, 50, 50, 50), Color.White);
-                    spriteBatch.Draw(tileNormal.Sprite, new Rectangle(250, 100, 50, 50), Color.White);
-                    spriteBatch.Draw(tileNormal.Sprite, new Rectangle(200, 150, 50, 50), Color.White);
-                    spriteBatch.Draw(tileNormal.Sprite, new Rectangle(200, 200, 50, 50), Color.White);
-                    
-                    spriteBatch.Draw(tileBuff.Sprite, tileBuff.rectangle, Color.White);
-                    spriteBatch.Draw(tileBuff.Sprite, tileBuff2.rectangle, Color.White);
-                    
-                    spriteBatch.Draw(tileBuffReq.Sprite, tileBuffReq.rectangle , Color.White);
-                    spriteBatch.Draw(tileBuffReq.Sprite, tileBuffReq2.rectangle, Color.White);
-                    spriteBatch.Draw(tileBuffReq.Sprite, tileBuffReq3.rectangle, Color.White);
-
-                    spriteBatch.Draw(tileMove.Sprite, tileMove.rectangle, Color.White);
-                    spriteBatch.Draw(tileMove.Sprite, tileMove2.rectangle, Color.White);
-                    spriteBatch.Draw(tileMove.Sprite, tileMove3.rectangle, Color.White);
-                    spriteBatch.Draw(tileMove.Sprite, tileMove4.rectangle, Color.White);
-
-                    spriteBatch.Draw(tileWin.Sprite, tileWin.rectangle, Color.White);
-                    spriteBatch.DrawString(spriteFont, Timer.ToString(), new Vector2(50,50), Color.Blue);
-
+                    // Draw map
+                    level1.DrawMap(spriteBatch);
 
                     // Draw Player (basic)
                     if (playerState == PlayerState.Left)
@@ -298,36 +242,6 @@ namespace Milestone_2_Project
             base.Draw(gameTime);
         }
 
-        // Processes collisions
-        public void UpdateCollisions()
-        {
-            if (tileKill.CheckCollision(player) || tileKill2.CheckCollision(player))
-            {
-                gameState = GameState.Gameover;
-            }
-            
-            if (tileBuff.CheckCollision(player)|| tileBuff2.CheckCollision(player))
-            {
-                player.HasBuff = true;
-            }
-
-            if (tileBuffReq.CheckCollision(player)|| tileBuffReq2.CheckCollision(player)|| tileBuffReq3.CheckCollision(player))
-            {
-                if (!player.HasBuff)
-                {
-                    gameState = GameState.Gameover;
-                }
-            }
-
-            if (tileMove.CheckCollision(player)|| tileMove2.CheckCollision(player)|| tileMove3.CheckCollision(player)|| tileMove4.CheckCollision(player))
-            {
-                player.PositionX -= 50;
-            }
-            if(tileWin.CheckCollision(player))
-            {
-                gameState = GameState.Win;
-            }
-        }
 
         // Processes pressing a key once
         public Boolean SingleKeyPress(Keys key)

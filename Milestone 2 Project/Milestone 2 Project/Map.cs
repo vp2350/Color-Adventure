@@ -44,7 +44,7 @@ namespace Milestone_2_Project
         {
             tileType = new int[7, 7];
 
-            FileStream filestream = new FileStream(mapName, FileMode.Open, FileAccess.Read);
+            FileStream filestream = new FileStream("../../../../Resources/Levels/" + mapName, FileMode.Open, FileAccess.Read);
 
             BinaryReader reader = new BinaryReader(filestream);
 
@@ -54,7 +54,7 @@ namespace Milestone_2_Project
                 for (int x = 0; x < 7; x++)
                 {
                     int current = reader.ReadInt32();
-                    tileType[x,y] = reader.ReadInt32();
+                    tileType[y,x] = current;
                 }
             }
 
@@ -63,8 +63,8 @@ namespace Milestone_2_Project
         }
 
 
-        // Uses tileType array to populate the gameMap with tiles
-        public void PopulateGameMap()
+        // Uses tileType array to populate the gameMap with tiles and adds textures to the tiles in the map
+        public void PopulateGameMap(Texture2D normalTile, Texture2D killTile, Texture2D buffTile, Texture2D buffReqTile, Texture2D moveTile, Texture2D winTile)
         {
             // Do not perform method unless a map has been read.
             if (tileType == null)
@@ -87,21 +87,27 @@ namespace Milestone_2_Project
                     {
                         case 1:
                             gameMap[x, y] = new TileNormal(lastRectangle);
+                            gameMap[x, y].Sprite = normalTile;
                             break;
                         case 2:
                             gameMap[x, y] = new TileKill(lastRectangle);
+                            gameMap[x, y].Sprite = killTile;
                             break;
                         case 3:
                             gameMap[x, y] = new TileBuff(lastRectangle);
+                            gameMap[x, y].Sprite = buffTile;
                             break;
                         case 4:
                             gameMap[x, y] = new TileBuffReq(lastRectangle);
+                            gameMap[x, y].Sprite = buffReqTile;
                             break;
                         case 5:
                             gameMap[x, y] = new TileMove(lastRectangle);
+                            gameMap[x, y].Sprite = moveTile;
                             break;
                         case 6:
-                            // gameMap[x, y] = new TileNormal(lastRectangle); Reserved for game win tile.
+                            gameMap[x, y] = new TileWin(lastRectangle);
+                            gameMap[x, y].Sprite = winTile;
                             break;
                         default:
                             // If the number is 0, the tile is meant to be blank, so, no tile will be put here.
@@ -118,14 +124,48 @@ namespace Milestone_2_Project
             }
         }
 
-
         // Loops through each tile in the map and draws it.
         public void DrawMap(SpriteBatch spriteBatch)
         {
             foreach(Tile tile in gameMap)
             {
-                spriteBatch.Draw(tile.Sprite, tile.rectangle, Color.White);
+                if (tile != null)
+                {
+                    spriteBatch.Draw(tile.Sprite, tile.rectangle, Color.White);
+                }
             }
         }
+
+        /* Code from old temporary collisions method in game class
+        public Boolean CalculateCollisions()
+        {
+            if (tileKill.CheckCollision(player) || tileKill2.CheckCollision(player))
+            {
+                gameState = GameState.Gameover;
+            }
+
+            if (tileBuff.CheckCollision(player) || tileBuff2.CheckCollision(player))
+            {
+                player.HasBuff = true;
+            }
+
+            if (tileBuffReq.CheckCollision(player) || tileBuffReq2.CheckCollision(player) || tileBuffReq3.CheckCollision(player))
+            {
+                if (!player.HasBuff)
+                {
+                    gameState = GameState.Gameover;
+                }
+            }
+
+            if (tileMove.CheckCollision(player) || tileMove2.CheckCollision(player) || tileMove3.CheckCollision(player) || tileMove4.CheckCollision(player))
+            {
+                player.PositionX -= 50;
+            }
+            if (tileWin.CheckCollision(player))
+            {
+                gameState = GameState.Win;
+            }
+        }
+        */
     }
 }
