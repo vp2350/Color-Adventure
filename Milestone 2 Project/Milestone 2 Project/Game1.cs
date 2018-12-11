@@ -134,6 +134,7 @@ namespace Milestone_2_Project
                     }
                     break;
 
+
                 case GameState.Instructions:
                     // Pressing enter returns to the menu
                     if (SingleKeyPress(Keys.Enter))
@@ -142,13 +143,16 @@ namespace Milestone_2_Project
                     }
                     break;
 
+
                 case GameState.Game:
-                    // checks for collisions
-                    // UpdateCollisions();
+                    // Checks for collisions
+                    CalculateCollisions();
                     playerMovements();
-                    //timer
+
+                    // Timer
                     Timer += gameTime.TotalGameTime.Seconds;
                     break;
+
 
                 case GameState.Gameover:
                     if (SingleKeyPress(Keys.Enter))
@@ -277,6 +281,51 @@ namespace Milestone_2_Project
             {
                 playerState = PlayerState.Right;
                 player.PositionX += 2;
+            }
+        }
+
+        // Handles collisions between player and map
+        public void CalculateCollisions()
+        {
+            // Loops through the tiles on the map, and will return an integer related to the type of tile being stepped on
+            int result = level1.CalculateCollisions(player);
+
+            switch (result)
+            {
+                // Normal tile is landed on, nothing needs to be done
+                case 1:
+                    break;
+
+                // Give Buff tile is landed on
+                case 2:
+                    player.HasBuff = true;
+                    break;
+
+                // Buff Required tile is landed on
+                case 3:
+                    if (!player.HasBuff)
+                    {
+                        gameState = GameState.Gameover;
+                    }
+                    break;
+
+                // Move tile is landed on
+                case 4:
+                    player.PositionX -= 50;
+                    break;
+                
+                // Kill tile is landed on
+                case 5:
+                    gameState = GameState.Gameover;
+                    break;
+                
+                // Win tile is landed on
+                case 6:
+                    gameState = GameState.Win;
+                    break;
+
+                default:
+                    break;
             }
         }
         

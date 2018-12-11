@@ -136,36 +136,68 @@ namespace Milestone_2_Project
             }
         }
 
-        /* Code from old temporary collisions method in game class
-        public Boolean CalculateCollisions()
+        // Returns an integer depending on the type of tile that is being colided with
+        public int CalculateCollisions(Player player)
         {
-            if (tileKill.CheckCollision(player) || tileKill2.CheckCollision(player))
-            {
-                gameState = GameState.Gameover;
-            }
 
-            if (tileBuff.CheckCollision(player) || tileBuff2.CheckCollision(player))
+            foreach (Tile tile in gameMap)
             {
-                player.HasBuff = true;
-            }
-
-            if (tileBuffReq.CheckCollision(player) || tileBuffReq2.CheckCollision(player) || tileBuffReq3.CheckCollision(player))
-            {
-                if (!player.HasBuff)
+                // Normal tile, returns 1
+                if (tile is TileNormal)
                 {
-                    gameState = GameState.Gameover;
+                    if (tile.CheckCollision(player))
+                    {
+                        return 1;
+                    }
+                }
+
+                // Give Buff tile, returns 2
+                else if (tile is TileBuff)
+                {
+                    if (tile.CheckCollision(player))
+                    {
+                        return 2;
+                    }
+                }
+
+                // Buff Required tile, returns 3
+                else if (tile is TileBuffReq)
+                {
+                    if (tile.CheckCollision(player))
+                    {
+                        return 3;
+                    }
+                }
+
+                // Move tile, returns 4
+                else if (tile is TileMove)
+                {
+                    if (tile.CheckCollision(player))
+                    {
+                        return 4;
+                    }
+                }
+
+                // Kill tile, returns 5
+                else if (tile is TileKill)
+                {
+                    if (tile.CheckCollision(player))
+                    {
+                        return 5;
+                    }
+                }
+
+                // Win tile, returns 6
+                else if (tile is TileWin)
+                {
+                    if (tile.CheckCollision(player))
+                    {
+                        return 6;
+                    }
                 }
             }
 
-            if (tileMove.CheckCollision(player) || tileMove2.CheckCollision(player) || tileMove3.CheckCollision(player) || tileMove4.CheckCollision(player))
-            {
-                player.PositionX -= 50;
-            }
-            if (tileWin.CheckCollision(player))
-            {
-                gameState = GameState.Win;
-            }
+            return 0;
         }
-        */
     }
 }
