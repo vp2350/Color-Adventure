@@ -30,6 +30,7 @@ namespace Milestone_2_Project
         double timePerFrame = 100;
         int numFrames = 2;
         int framesElapsed;
+        int level;
         const int PLAYER_Y = 30;
         const int PLAYER_HEIGHT = 20;
         const int PLAYER_WIDTH = 15;
@@ -37,6 +38,7 @@ namespace Milestone_2_Project
 
         // Map
         Map level1;
+        Map level2;
 
         //background
         Texture2D background;
@@ -67,6 +69,9 @@ namespace Milestone_2_Project
 
             // Create new map, at location 300, 100 with tile size 50, 50
             level1 = new Map(new Vector2(300, 100), 50, 50);
+            level2 = new Map(new Vector2(300, 100), 50, 50);
+
+            level = 1;
 
             base.Initialize();
         }
@@ -82,8 +87,16 @@ namespace Milestone_2_Project
             background = Content.Load<Texture2D>("933");
 
             // Load map and populate it
-            level1.ReadMap("test.data");
+            level1.ReadMap("level1.data");
             level1.PopulateGameMap(Content.Load<Texture2D>("GreenTile"),
+                                   Content.Load<Texture2D>("RedTile"),
+                                   Content.Load<Texture2D>("BlueTile"),
+                                   Content.Load<Texture2D>("PurpleTile"),
+                                   Content.Load<Texture2D>("YellowTile"),
+                                   Content.Load<Texture2D>("WinTile"));
+
+            level2.ReadMap("level2.data");
+            level2.PopulateGameMap(Content.Load<Texture2D>("GreenTile"),
                                    Content.Load<Texture2D>("RedTile"),
                                    Content.Load<Texture2D>("BlueTile"),
                                    Content.Load<Texture2D>("PurpleTile"),
@@ -159,6 +172,7 @@ namespace Milestone_2_Project
                     {
                         player.HasBuff = false;
                         gameState = GameState.Menu;
+                        level = 1;
                     }
                     if (SingleKeyPress(Keys.Escape))
                     {
@@ -176,6 +190,7 @@ namespace Milestone_2_Project
                     {
                         player.HasBuff = false;
                         gameState = GameState.Menu;
+                        level = 1;
                     }
                     if (SingleKeyPress(Keys.Escape))
                     {
@@ -227,8 +242,18 @@ namespace Milestone_2_Project
 
                 case GameState.Game:
 
-                    // Draw map
-                    level1.DrawMap(spriteBatch);
+                    // Draw level 1
+                    if (level == 1)
+                    {
+                        level1.DrawMap(spriteBatch);
+                    }
+
+                    // Draw level 2
+                    else if (level == 2)
+                    {
+                        level2.DrawMap(spriteBatch);
+                    }
+
 
                     // Draw Player (basic)
                     if (playerState == PlayerState.Left)
@@ -243,7 +268,7 @@ namespace Milestone_2_Project
                     }
 
                     // Draw Text
-                    spriteBatch.DrawString(spriteFont, "Milestone 2", new Vector2(10, 10), Color.Black);
+                    spriteBatch.DrawString(spriteFont, "Level " + level, new Vector2(10, 10), Color.Black);
                     spriteBatch.DrawString(spriteFont, "Buff: " + player.HasBuff, new Vector2(10, 30), Color.Black);
                     break;
 
@@ -276,27 +301,138 @@ namespace Milestone_2_Project
         }
 
         /// <summary>
-        /// method for player's move
+        /// Method for player's move. Wont allow character to move around map
         /// </summary>
         public void playerMovements()
         {
             if (kbState.IsKeyDown(Keys.W))
             {
+                int mapLoc_X = 0;
+                int mapLoc_Y = 0;
+
+                // Set boundaries for level 1
+                if (level == 1)
+                {
+                    mapLoc_X = (int)level1.MapLocation.X;
+                    mapLoc_Y = (int)level1.MapLocation.Y;
+                }
+
+                // Set boundaries for level 2
+                else if (level == 2)
+                {
+                    mapLoc_X = (int)level2.MapLocation.X;
+                    mapLoc_Y = (int)level2.MapLocation.Y;
+                }
+
+                // Level boundary boxes
+                if (player.PositionY <= mapLoc_Y && player.PositionX >= mapLoc_X)
+                {
+                    return;
+                }
+
+                // Screen Boundary box
+                if (player.PositionY == 0)
+                {
+                    return;
+                }
                 playerState = PlayerState.Up;
                 player.PositionY -= 2;
             }
+
             if (kbState.IsKeyDown(Keys.S))
             {
+                int tilesUp = 0;
+                int mapLoc_X = 0;
+                int mapLoc_Y = 0;
+                int tileHeight = 0;
+
+                // Set boundaries for level 1
+                if (level == 1)
+                {
+                    mapLoc_X = (int)level1.MapLocation.X;
+                    mapLoc_Y = (int)level1.MapLocation.Y;
+                    tileHeight = level1.TileHeight;
+                    tilesUp = 4;
+                }
+
+                // Set boundaries for level 2
+                else if (level == 2)
+                {
+                    mapLoc_X = (int)level2.MapLocation.X;
+                    mapLoc_Y = (int)level2.MapLocation.Y;
+                    tileHeight = level2.TileHeight;
+                    tilesUp = 7;
+                }
+
+                // Level boundary boxes
+                if (player.PositionY + PLAYER_HEIGHT >= mapLoc_Y + (tileHeight * tilesUp) && player.PositionX >= mapLoc_X)
+                {
+                    return;
+                }
+
+                // Screen Boundary box
+                if (player.PositionY + PLAYER_HEIGHT == GraphicsDevice.Viewport.Height)
+                {
+                    return;
+                }
                 playerState = PlayerState.Down;
                 player.PositionY += 2;
             }
+
             if (kbState.IsKeyDown(Keys.A))
             {
+                if (player.PositionX == 0)
+                {
+                    return;
+                }
                 playerState = PlayerState.Left;
                 player.PositionX -= 2;
             }
+
             if (kbState.IsKeyDown(Keys.D))
             {
+                int tilesUp = 0;
+                int tilesRight = 0;
+                int mapLoc_X = 0;
+                int mapLoc_Y = 0;
+                int tileHeight = 0;
+                int tileWidth = 0;
+
+                // Set boundaries for level 1
+                if (level == 1)
+                {
+                    mapLoc_X = (int)level1.MapLocation.X;
+                    mapLoc_Y = (int)level1.MapLocation.Y;
+                    tileHeight = level1.TileHeight;
+                    tileWidth = level1.TileHeight;
+                    tilesUp = 5;
+                    tilesRight = 4;
+                }
+
+                // Set boundaries for level 2
+                else if (level == 2)
+                {
+                    mapLoc_X = (int)level2.MapLocation.X;
+                    mapLoc_Y = (int)level2.MapLocation.Y;
+                    tileHeight = level2.TileHeight;
+                    tileWidth = level2.TileHeight;
+                    tilesUp = 7;
+                    tilesRight = 7;
+                }
+
+                // Level boundary boxes
+                if ((player.PositionX + PLAYER_WIDTH >= mapLoc_X + (tileWidth * tilesUp) ||
+                    (player.PositionX + PLAYER_WIDTH >= mapLoc_X && (player.PositionY + PLAYER_HEIGHT >= mapLoc_Y + (tileHeight * tilesRight) ||
+                                                                     player.PositionY <= mapLoc_Y))))
+                {
+                    return;
+                }
+
+                // Screen Boundary box
+                if (player.PositionX + PLAYER_WIDTH == GraphicsDevice.Viewport.Width)
+                {
+                    return;
+                }
                 playerState = PlayerState.Right;
                 player.PositionX += 2;
             }
@@ -305,8 +441,18 @@ namespace Milestone_2_Project
         // Handles collisions between player and map
         public void CalculateCollisions()
         {
-            // Loops through the tiles on the map, and will return an integer related to the type of tile being stepped on
-            int result = level1.CalculateCollisions(player);
+            int result = 0;
+
+            // Calculate collisions for level 1
+            if (level == 1)
+            {
+                result = level1.CalculateCollisions(player);
+            }
+            // Calculate collisions for level 2
+            else if (level == 2)
+            {
+                result = level2.CalculateCollisions(player);
+            }
 
             switch (result)
             {
@@ -339,6 +485,16 @@ namespace Milestone_2_Project
                 
                 // Win tile is landed on
                 case 6:
+
+                    // Change to level 2
+                    if (level == 1)
+                    {
+                        level = 2;
+                        // Reset player
+                        player.rectangle = new Rectangle(100, 100, 25, 30);
+                        break;
+                    }
+
                     gameState = GameState.Win;
                     break;
 

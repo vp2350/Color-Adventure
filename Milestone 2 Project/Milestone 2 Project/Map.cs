@@ -28,6 +28,30 @@ namespace Milestone_2_Project
                 return gameMap;
             }
         }
+        // Readable
+        public int TileWidth
+        {
+            get
+            {
+                return tileWidth;
+            }
+        }
+        // Readable
+        public int TileHeight
+        {
+            get
+            {
+                return tileHeight;
+            }
+        }
+        // Readable
+        public Vector2 MapLocation
+        {
+            get
+            {
+                return mapLocation;
+            }
+        }
 
 
         public Map(Vector2 mapLocation, int tileWidth, int tileHeight)
@@ -54,7 +78,7 @@ namespace Milestone_2_Project
                 for (int x = 0; x < 7; x++)
                 {
                     int current = reader.ReadInt32();
-                    tileType[y,x] = current;
+                    tileType[x,y] = current;
                 }
             }
 
@@ -82,7 +106,7 @@ namespace Milestone_2_Project
                     // Get the tile type at current index
                     current = tileType[x, y];
 
-                    // Create new tile object depending on 
+                    // Create new tile object depending on the number present in the array
                     switch (current)
                     {
                         case 1:
