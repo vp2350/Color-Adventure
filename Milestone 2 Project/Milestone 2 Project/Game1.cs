@@ -164,10 +164,28 @@ namespace Milestone_2_Project
                     {
                         this.Exit();
                     }
+                
+                
 
                     // Reset player
                     player.rectangle = new Rectangle(100, 100, 25, 30);
                     break;
+
+                case GameState.Win:
+                    if (SingleKeyPress(Keys.Enter))
+                    {
+                        player.HasBuff = false;
+                        gameState = GameState.Menu;
+                    }
+                    if (SingleKeyPress(Keys.Escape))
+                    {
+                        this.Exit();
+                    }
+
+                    // Reset player
+                    player.rectangle = new Rectangle(100, 100, 25, 30);
+                    break;
+
             }
 
 
